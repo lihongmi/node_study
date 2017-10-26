@@ -34,10 +34,10 @@ Student.findByName("liu",function(err,data){
 });*/
 
 //删除数据
-Student.remove({ _id: '59f161f7154ae10fd427bb70' }, function (err) {
+/*Student.remove({ _id: '59f161f7154ae10fd427bb70' }, function (err) {
     if (err) return handleError(err);
     console.log("removed!");
-  });
+  });*/
 
 
 
