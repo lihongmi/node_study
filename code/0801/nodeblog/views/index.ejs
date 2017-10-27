@@ -5,10 +5,19 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+      <span><%=username%></span>
+      <input type="button" onclick="tuichu()" value="退出">
+
+      
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <input type="button" onclick="tuichu()" value="退出">
 
+
+    <ul>
+      <li><a href="/article/publish">发布文章</a></li>
+      <li><a href="/article/">文章列表</a></li>
+     
+    </ul>
     <script src="/javascripts/jquery.1.8.3.min.js"></script>
     <script>
       

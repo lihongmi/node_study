@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blog', { useMongoClient: true });
-mongoose.Promise = global.Promise;
+
 
 var userSchema = mongoose.Schema({
     name: String,
