@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 
+var session = require('express-session')
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -23,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'nodeblog'
+}))
+
+
 
 app.use('/', index);
 app.use('/users', users);
