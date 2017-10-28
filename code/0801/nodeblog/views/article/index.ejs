@@ -19,11 +19,14 @@
   <body>
 
     <div class="container">
-      
+    
+        <%include ../include/head.ejs%>
+  
+  
          <ul>
          
                 <% for(var i=0; i<articles.length; i++) {%>
-                        <li><a href="/article/update/<%= articles[i]._id %>"><%= articles[i].title %></a><input type="button" value="X"/></li>
+                        <li><a href="/article/update/<%= articles[i]._id %>"><%= articles[i].title %></a><input aid="<%=articles[i]._id%>" class="delete" type="button" value="X" /></li>
                      <% } %>
 
 
@@ -34,7 +37,36 @@
     <script src="/javascripts/jquery.1.8.3.min.js"></script>
     <script>
       
+$(".delete").click(function(){
+  var _this=$(this);
+  var _id=$(this).attr("aid");
+  /*$.post('/article/del',{articleid:_id},function(data){
 
+    if(data.status==1){
+      alert("删除成功");
+    }else{
+      alert("删除失败");
+    }
+  });*/
+
+
+  $.ajax({
+    url:'/article/del',
+    type:"post",
+    data:{articleid:_id},
+    success:function(data){
+      
+          if(data.status==1){
+            alert("删除成功");
+            _this.parent("li").remove();
+            //location.reload();
+           // location.href=location.href;
+          }else{
+            alert("删除失败");
+          }
+     }
+  });
+});
     </script>
 
   </body>

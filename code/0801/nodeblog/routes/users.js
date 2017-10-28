@@ -1,14 +1,11 @@
 var express = require('express');
 var User = require('../model/User');
-
+var authorise=require("../common/authorise");
 
 var router = express.Router();
 
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+/* GET article listing. */
 
 router.get('/signup', function(req, res, next) {
   res.render("users/signup");

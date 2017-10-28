@@ -1,16 +1,34 @@
 var express = require('express');
-var authorise=require("../common/authorise");
 
+var Article = require('../model/Article');
+var authorise=require("../common/authorise");
 
 var router = express.Router();
 
 
 /* GET home page. */
-router.get('/',authorise,function(req, res, next) {
+router.get('/',authorise.norenzheng,function(req, res, next) {
 
-    res.render('index', { title: 'Express',username:req.session.user.name });
+
+
+    Article.find(function(err,data){
+
+      res.render('index',{title: 'Express',articles:data });
+    });
+
 });
 
+
+router.get('/articledetail/:id',authorise.norenzheng, function(req, res, next) {
+  
+    Article.find({_id:req.params.id},function (err, article) {
+      if (err) return handleError(err);
+      console.log(article);
+     res.render("articledetail",{article:article[0]});
+    });
+  
+    
+});
 
 router.get('/session', function(req, res, next) {
     if(req.session.views==undefined){

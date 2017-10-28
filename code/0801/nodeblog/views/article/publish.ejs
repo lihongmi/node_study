@@ -19,8 +19,7 @@
   <body>
 
     <div class="container">
-        <span><%=username%></span>
-            <input type="button" onclick="tuichu()" value="退出">
+      <%include ../include/head.ejs%>
             <form class="form-horizontal" method="post" action="/article/publish">
             <div class="form-group">
 
@@ -47,20 +46,7 @@
                 </form>
     </div> <!-- /container -->
     <script src="/javascripts/jquery.1.8.3.min.js"></script>
-    <script>
-      
-    function tuichu(){
-      $.post("/users/signout",function(data){
-
-        if(data.state==1){
-          alert("退出成功");
-          location.href="/users/signin";
-        }else{
-          alert("退出失败");
-        }
-      });
-    }
-    </script>
+    
 
   </body>
 </html>

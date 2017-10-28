@@ -1,0 +1,70 @@
+
+<div>
+
+    <div class="page-header">
+
+      <h1>文章发布系统</h1>
+    </div>
+
+
+    <nav class="navbar  navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar">1</span>
+              <span class="icon-bar">2</span>
+              <span class="icon-bar">3</span>
+            </button>
+
+          </div>
+  
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+            <ul class="nav navbar-nav">
+              <li  class="<%=locals.isActive('/')%>"><a href="/">首页</a></li>
+            
+
+              <% if(!locals.username){%>
+  
+                <li class="<%=locals.isActive('/signin')%>" > <a href="/users/signin"  >登录</a></li>
+                <li  class="<%=locals.isActive('/signup')%>"><a href="/users/signup"  >注册</a></li>
+  
+              <%  }%>
+            </ul>
+            <ul class="nav navbar-nav  navbar-right">
+              
+       
+                <% if(locals.username){%>
+              
+                  <li><%=locals.username%></li>
+               
+                  <li><a href="/article/publish">发布文章</a></li>
+                  <li><a href="/article">文章列表</a></li>
+
+                  <li><input type="button" onclick="tuichu()" value="退出"/></li>
+                <%}%>
+              
+              </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+   
+</div>
+
+
+<script>
+    
+  function tuichu(){
+    $.post("/users/signout",function(data){
+
+      if(data.state==1){
+        alert("退出成功");
+        location.href="/";
+      }else{
+        alert("退出失败");
+      }
+    });
+  }
+  </script>

@@ -1,11 +1,17 @@
 var express = require('express');
 var authorise=require("../common/authorise");
+var fs=require("fs");
+
+
 var router = express.Router();
 
 var Article = require('../model/Article');
 
 
-router.use(authorise);
+
+
+router.use(authorise.renzheng,authorise.norenzheng);
+
 
 /* GET users listing. */
 router.get('/',function(req, res, next) {
@@ -34,6 +40,9 @@ router.get('/update/:id', function(req, res, next) {
     
   });
 
+
+  
+
   router.post('/update', function(req, res, next) {
     
     let={title,author,content,id}=req.body;
@@ -52,6 +61,34 @@ router.get('/update/:id', function(req, res, next) {
   
     
   });
+
+
+  router.post('/del', function(req, res, next) {
+    
+    let articleid=req.body.articleid;
+    //articleid=articleid.trim();
+
+    
+    Article.remove({ _id: articleid }, function (err) {
+      var resObj={};
+      if (err){
+        console.log(1);
+       // fs.writeFile("./log.log",err);
+        console.log(2);
+
+        resObj={status:-1}
+      }else{
+        resObj={status:1}
+      }
+
+
+      res.json(resObj);
+    });
+
+      
+    
+  });
+
 router.post('/publish', function(req, res, next) {
   
       let {title,author,content}=req.body;

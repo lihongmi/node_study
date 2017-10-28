@@ -2,36 +2,29 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+   
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    
   </head>
   <body>
-      <span><%=username%></span>
-      <input type="button" onclick="tuichu()" value="退出">
+    <div class="container">
+    <%include include/head.ejs%>
 
-      
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
 
 
     <ul>
-      <li><a href="/article/publish">发布文章</a></li>
-      <li><a href="/article/">文章列表</a></li>
-     
-    </ul>
-    <script src="/javascripts/jquery.1.8.3.min.js"></script>
-    <script>
       
-    function tuichu(){
-      $.post("/users/signout",function(data){
+             <% for(var i=0; i<articles.length; i++) {%>
+                     <li><a href="/articledetail/<%= articles[i]._id %>"><%= articles[i].title %></a></li>
+                  <% } %>
 
-        if(data.state==1){
-          alert("退出成功");
-          location.href="/users/signin";
-        }else{
-          alert("退出失败");
-        }
-      });
-    }
-    </script>
+
+         </ul>  
+        </div>
+    <script src="/javascripts/jquery.1.8.3.min.js"></script>
+    
   </body>
 </html>

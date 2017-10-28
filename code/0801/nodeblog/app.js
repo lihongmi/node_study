@@ -9,9 +9,17 @@ var lessMiddleware = require('less-middleware');
 var session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
 
+var helpers = require('view-helpers')
+
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var article = require('./routes/article');
+
+
+
+
 
 var app = express();
 
@@ -38,6 +46,9 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
+
+
+app.use(helpers('app name'))
 
 
 app.use('/', index);
