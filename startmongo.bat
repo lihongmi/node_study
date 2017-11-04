@@ -1,0 +1,1 @@
+D:\MongoDB\Server\3.2\bin\mongod -f D:\MongoDB\mongod.conf
